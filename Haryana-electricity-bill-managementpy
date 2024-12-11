@@ -1,0 +1,629 @@
+# from tkinter import *
+# from tkcalendar import DateEntry
+# import tkinter as tk
+# from tkinter import ttk
+# import mysql.connector
+# from tkinter import messagebox
+
+# # Function to submit form data to the database
+# def submit():
+#     try:
+#         customer_name = et_customer.get()
+#         dob = et_dob.get_date().strftime("%Y-%m-%d")
+#         father_name = et_father.get()
+#         address = et_address.get()
+#         state = state_.get()
+#         post_office = et_post_office.get()
+#         pin_code = et_pin_code.get()
+#         district = dist1.get()
+#         mobile_no = et_mobile_no.get()
+#         meter_no = et_meter_no.get()
+#         account_no = et_account_no.get()
+#         old_due = et_old_due.get()
+#         old_reading_date = et_old_reading_date.get()
+#         new_reading_date = et_new_reading_date.get()
+#         total_days_reading = et_total_days_reading.get()
+#         old_reading = et_old_reading.get()
+#         new_reading = et_new_reading.get()
+#         total_consumption = et_total_consumption.get()
+#         unit_rate = et_unit_rate.get()
+#         charges = et_charges.get()
+#         total_amount = et_total_amount.get()
+#         bill_due_date = et_bill_due_date.get()
+
+#         # Check if any field is empty
+#         if not all([customer_name, dob, father_name, address, state, post_office, pin_code, district, mobile_no, meter_no, account_no, old_due, old_reading_date, new_reading_date, total_days_reading, old_reading, new_reading, total_consumption, unit_rate, charges, total_amount, bill_due_date]):
+#             messagebox.showerror('Error', "All fields are mandatory")
+#             return
+
+#         # Insert data into the database
+#         add_data(customer_name, dob, father_name, address, state, post_office, pin_code, district, mobile_no, meter_no, account_no, old_due, old_reading_date, new_reading_date, total_days_reading, old_reading, new_reading, total_consumption, unit_rate, charges, total_amount, bill_due_date)
+        
+#         messagebox.showinfo('Success', "Data submitted successfully!")
+#     except Exception as e:
+#         messagebox.showerror('Error', str(e))
+
+# # Function to create the database
+# def create_database():
+#     conn = mysql.connector.connect(
+#         host="localhost",
+#         user="root",
+#         password="vinit1234"
+#     )
+#     cursor = conn.cursor()
+#     cursor.execute("CREATE DATABASE IF NOT EXISTS haryana_electricity_bill")
+#     conn.commit()
+#     conn.close()
+
+# # Function to create the table
+# def create_table():
+#     conn = mysql.connector.connect(
+#         host="localhost",
+#         user="root",
+#         password="vinit1234",
+#         database="haryana_electricity_bill"
+#     )
+#     cursor = conn.cursor()
+#     cursor.execute('''CREATE TABLE IF NOT EXISTS HVBN (
+#         customer_name VARCHAR(50),
+#         dob DATE,
+#         father_name VARCHAR(50),
+#         address VARCHAR(50),
+#         state_ VARCHAR(50),
+#         post_office VARCHAR(50),
+#         pin_code INT,
+#         district VARCHAR(50),
+#         mobile_no BIGINT,
+#         meter_no BIGINT,
+#         account_no BIGINT,
+#         old_due BIGINT,
+#         old_reading_date DATE,
+#         new_reading_date DATE,
+#         total_days_reading INT,
+#         old_reading BIGINT,
+#         new_reading BIGINT,
+#         total_consumption BIGINT,
+#         unit_rate INT,
+#         charges BIGINT,
+#         total_amount BIGINT,
+#         bill_due_date DATE
+#     )''')
+#     conn.commit()
+#     conn.close()
+
+# # Function to add data to the table
+# def add_data(customer_name, dob, father_name, address, state, post_office, pin_code, district, mobile_no, meter_no, account_no, old_due, old_reading_date, new_reading_date, total_days_reading, old_reading, new_reading, total_consumption, unit_rate, charges, total_amount, bill_due_date):
+#     conn = mysql.connector.connect(
+#         host="localhost",
+#         user="root",
+#         password="vinit1234",
+#         database="haryana_electricity_bill"
+#     )
+#     cursor = conn.cursor()
+#     cursor.execute('''INSERT INTO HVBN (customer_name, dob, father_name, address, state_, post_office, pin_code, district, mobile_no, meter_no, account_no, old_due, old_reading_date, new_reading_date, total_days_reading, old_reading, new_reading, total_consumption, unit_rate, charges, total_amount, bill_due_date) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)''', 
+#     (customer_name, dob, father_name, address, state, post_office, pin_code, district, mobile_no, meter_no, account_no, old_due, old_reading_date, new_reading_date, total_days_reading, old_reading, new_reading, total_consumption, unit_rate, charges, total_amount, bill_due_date))
+#     conn.commit()
+#     conn.close()
+
+# root = tk.Tk()
+# # root.iconbitmap("bulb.ico")
+# root.title("Haryana Bijli Board")
+# root.geometry("2000x850")
+
+# f = tk.LabelFrame(root, height=60, width=1000, font=("bold"), bg="#1E3D81").pack(fill=X)
+# f1 = tk.Label(f, text="ELECTRICITY BILL", font=("arial 20 bold"), width=25, bg="#6CBCE0").place(x=550, y=12)    
+# f2 = tk.LabelFrame(root,width=80, height=700, bg="#006CB1").place(x=10, y=70)
+# text="ELECTRICITY BILL"
+
+# for i, char in enumerate(text):
+#     label=Label(f2,text=char,font=("arial 12 bold"),bg="#006CB1")
+#     label.place(x=30, y=90 + i*40)
+    
+# f3 = tk.LabelFrame(root, width=80, height=700, bg="#006CB1").place(x=1445, y=70)
+# for i, char in enumerate(text):
+#     label2=Label(f2,text=char,font=("arial 12 bold"),bg="#006CB1")
+#     label2.place(x=1470, y=90 + i*40)
+# f4 = tk.LabelFrame(root, height=250, width=1335, bg="#6CBCE0").place(x=100, y=72)
+
+# e = tk.Label(f4, text="Customer Detail", bg="#6CBCE0", font=("bold")).place(x=111, y=76)
+# e1 = tk.Label(f4, text="Customer name", font=("arial 11 bold"), bg="#6CBCE0").place(x=222, y=140)
+# et_customer = tk.Entry(f4)
+# et_customer.place(x=355, y=145)
+
+# e2 = tk.Label(f4, text="D.O.B", bg="#6CBCE0", font=("arial 11 bold")).place(x=680, y=140)
+# et_dob = DateEntry(f4, width=17)
+# et_dob.place(x=750, y=142)
+
+# e3 = tk.Label(f4, text="Father name", bg="#6CBCE0", font=("arial 11 bold")).place(x=1080, y=140)
+# et_father = tk.Entry(f4)
+# et_father.place(x=1200, y=144)
+
+# e4 = tk.Label(f4, text="Address", bg="#6CBCE0", font=("arial 11 bold")).place(x=222, y=200)
+# et_address = tk.Entry(f4)
+# et_address.place(x=355, y=205)
+
+# e5 = tk.Label(f4, text="State", bg="#6CBCE0", font=("arial 11 bold")).place(x=680, y=200)
+# state = StringVar()
+# state_ = ttk.Combobox(f4, width=17, height=5, textvariable=state)
+# state_["state"] = "readonly"
+# state_["values"] = ("Haryana",)
+# state_.place(x=750, y=202)
+# state_.current(0)
+
+# e6 = tk.Label(f4, text="Post office", bg="#6CBCE0", font=("arial 11 bold")).place(x=1080, y=200)
+# et_post_office = tk.Entry(f4)
+# et_post_office.place(x=1200, y=204)
+
+# e7 = tk.Label(f4, text="Pin code", bg="#6CBCE0", font=("arial 11 bold")).place(x=222, y=260)
+# et_pin_code = tk.Entry(f4)
+# et_pin_code.place(x=355, y=260)
+
+# e8 = tk.Label(f4, text="District", bg="#6CBCE0", font=("arial 11 bold")).place(x=680, y=260)
+# et_distt = StringVar()
+# dist1 = ttk.Combobox(f4, width=17, textvariable=et_distt)
+# dist1["state"] = "readonly"
+# dist1["values"] = ("Yamunanagar", "Ambala", "Gurugram", "Hisar", "Jind")
+# dist1.place(x=750, y=260)
+# dist1.current(0)
+
+# e = tk.Label(f4, text="Mobile No", bg="#6CBCE0", font=("arial 11 bold")).place(x=1080, y=260)
+# et_mobile_no = tk.Entry(f4)
+# et_mobile_no.place(x=1200, y=260)
+
+# f5 = tk.LabelFrame(root, height=250, width=1335, bg="#6CBCE0").place(x=100, y=333)
+
+# e9 = tk.Label(f5, text="Bill detail", bg="#6CBCE0", font=("bold")).place(x=111, y=345)
+# e10 = tk.Label(f5, text="Meter No", bg="#6CBCE0", font=("arial 11 bold")).place(x=200, y=400)
+# et_meter_no = tk.Entry(f5)
+# et_meter_no.place(x=355, y=400)
+
+# e11 = tk.Label(f5, text="Account No", bg="#6CBCE0", font=("arial 11 bold")).place(x=590, y=400)
+# et_account_no = tk.Entry(f5)
+# et_account_no.place(x=744, y=400)
+
+# e12 = tk.Label(f5, text="Old Due", bg="#6CBCE0", font=("arial 11 bold")).place(x=1040, y=400)
+# et_old_due = tk.Entry(f5)
+# et_old_due.place(x=1200, y=400)
+
+# e13 = tk.Label(f5, text="Old Reading Date", bg="#6CBCE0", font=("arial 11 bold")).place(x=200, y=460)
+# et_old_reading_date = tk.Entry(f5)
+# et_old_reading_date.place(x=355, y=460)
+
+# e14 = tk.Label(f5, text="New Reading Date", bg="#6CBCE0", font=("arial 11 bold")).place(x=590, y=460)
+# et_new_reading_date = tk.Entry(f5)
+# et_new_reading_date.place(x=744, y=460)
+
+# e15 = tk.Label(f5, text="Total Days Reading", bg="#6CBCE0", font=("arial 11 bold")).place(x=1040, y=460)
+# et_total_days_reading = tk.Entry(f5)
+# et_total_days_reading.place(x=1200, y=460)
+
+# e16 = tk.Label(f5, text="Old Reading ", bg="#6CBCE0", font=("arial 11 bold")).place(x=200, y=520)
+# et_old_reading = tk.Entry(f5)
+# et_old_reading.place(x=355, y=520)
+
+# e17 = tk.Label(f5, text="New Reading", bg="#6CBCE0", font=("arial 11 bold")).place(x=590, y=520)
+# et_new_reading = tk.Entry(f5)
+# et_new_reading.place(x=744, y=520)
+
+# e18 = tk.Label(f5, text="Total Consumption", bg="#6CBCE0", font=("arial 11 bold")).place(x=1040, y=520)
+# et_total_consumption = tk.Entry(f5)
+# et_total_consumption.place(x=1200, y=520)
+
+# f6 = tk.LabelFrame(root, height=100, width=1335, bg="#6CBCE0").place(x=100, y=594)
+# f7 = tk.Label(f6, text="Amount", bg="#6CBCE0", font=("bold")).place(x=111, y=606)
+# A = tk.Label(f6, text="Unit Rate", bg="#6CBCE0", font=("arial 11 bold")).place(x=230, y=645)
+# et_unit_rate = tk.Entry(f6)
+# et_unit_rate.place(x=355, y=645)
+
+# A1 = tk.Label(f6, text="Charges", bg="#6CBCE0", font=("arial 11 bold")).place(x=625, y=645)
+# et_charges = tk.Entry(f6)
+# et_charges.place(x=744, y=645)
+
+# A2 = tk.Label(f6, text="Total Amount", bg="#6CBCE0", font=("arial 11 bold")).place(x=1070, y=645)
+# et_total_amount = tk.Entry(f6)
+# et_total_amount.place(x=1200, y=645)
+
+# f8 = tk.LabelFrame(root, width=450, height=55, font=("arial 11 bold"), bg="#006CB1").place(x=984, y=705)
+# var = tk.Label(f8, text="Bill due date", bg="#006CB1", font=("arial 12 ")).place(x=1068, y=720)
+# et_bill_due_date = tk.Entry(f8)
+# et_bill_due_date.place(x=1198, y=723)
+
+# var3 = tk.Button(root, text="submit", bg="#6CBCE0",command = submit, font=("arial 13 bold")).place(x=730, y=730)
+
+# f9 = tk.LabelFrame(root, width=450, height=55, font=("arial 11 bold"), bg="#006CB1").place(x=100, y=705)
+# var4 = tk.Label(f9, text="HARYANA BIJLI VITRAN NIGAM", bg="#006CB1", font=("bold")).place(x=175, y=717)
+
+# create_database()
+# create_table()
+
+# root.mainloop()
+
+
+
+
+# # from tkinter import *
+# # from tkcalendar import DateEntry
+# # import tkinter as tk
+# # from tkinter import ttk
+# # import mysql.connector
+# # from tkinter import messagebox
+
+# # # Function to submit form data to the database
+# # def submit():
+# #     try:
+# #         customer_name = et_customer.get()
+# #         dob = et_dob.get_date().strftime("%Y-%m-%d")
+# #         father_name = et_father.get()
+# #         address = et_address.get()
+# #         state = state_.get()
+# #         post_office = et_post_office.get()
+# #         pin_code = et_pin_code.get()
+# #         district = dist1.get()
+# #         mobile_no = et_mobile_no.get()
+# #         meter_no = et_meter_no.get()
+# #         account_no = et_account_no.get()
+# #         old_due = et_old_due.get()
+# #         old_reading_date = et_old_reading_date.get()
+# #         new_reading_date = et_new_reading_date.get()
+# #         total_days_reading = et_total_days_reading.get()
+# #         old_reading = et_old_reading.get()
+# #         new_reading = et_new_reading.get()
+# #         total_consumption = et_total_consumption.get()
+# #         unit_rate = et_unit_rate.get()
+# #         charges = et_charges.get()
+# #         total_amount = et_total_amount.get()
+# #         bill_due_date = et_bill_due_date.get()
+
+# #         # Check if any field is empty
+# #         if not all([
+# #             customer_name, dob, father_name, address, state, post_office, 
+# #             pin_code, district, mobile_no, meter_no, account_no, old_due, 
+# #             old_reading_date, new_reading_date, total_days_reading, 
+# #             old_reading, new_reading, total_consumption, unit_rate, 
+# #             charges, total_amount, bill_due_date
+# #         ]):
+# #             messagebox.showerror('Error', "All fields are mandatory")
+# #             return
+
+# #         # Insert data into the database
+# #         add_data(
+# #             customer_name, dob, father_name, address, state, post_office, 
+# #             pin_code, district, mobile_no, meter_no, account_no, old_due, 
+# #             old_reading_date, new_reading_date, total_days_reading, 
+# #             old_reading, new_reading, total_consumption, unit_rate, 
+# #             charges, total_amount, bill_due_date
+# #         )
+# #         messagebox.showinfo('Success', "Data submitted successfully!")
+# #     except Exception as e:
+# #         messagebox.showerror('Error', str(e))
+
+# # # Function to create the database
+# # def create_database():
+# #     conn = mysql.connector.connect(
+# #         host="localhost",
+# #         user="root",
+# #         password="vinit1234"
+# #     )
+# #     cursor = conn.cursor()
+# #     cursor.execute("CREATE DATABASE IF NOT EXISTS haryana_electricity_bill")
+# #     conn.commit()
+# #     conn.close()
+
+# # # Function to create the table
+# # def create_table():
+# #     conn = mysql.connector.connect(
+# #         host="localhost",
+# #         user="root",
+# #         password="vinit1234",
+# #         database="haryana_electricity_bill"
+# #     )
+# #     cursor = conn.cursor()
+# #     cursor.execute('''CREATE TABLE IF NOT EXISTS HVBN (
+# #         customer_name VARCHAR(50),
+# #         dob DATE,
+# #         father_name VARCHAR(50),
+# #         address VARCHAR(50),
+# #         state_ VARCHAR(50),
+# #         post_office VARCHAR(50),
+# #         pin_code INT,
+# #         district VARCHAR(50),
+# #         mobile_no BIGINT,
+# #         meter_no BIGINT,
+# #         account_no BIGINT,
+# #         old_due BIGINT,
+# #         old_reading_date DATE,
+# #         new_reading_date DATE,
+# #         total_days_reading INT,
+# #         old_reading BIGINT,
+# #         new_reading BIGINT,
+# #         total_consumption BIGINT,
+# #         unit_rate INT,
+# #         charges BIGINT,
+# #         total_amount BIGINT,
+# #         bill_due_date DATE
+# #     )''')
+# #     conn.commit()
+# #     conn.close()
+
+# # # Function to add data to the table
+# # def add_data(
+# #     customer_name, dob, father_name, address, state, post_office, pin_code, 
+# #     district, mobile_no, meter_no, account_no, old_due, old_reading_date, 
+# #     new_reading_date, total_days_reading, old_reading, new_reading, 
+# #     total_consumption, unit_rate, charges, total_amount, bill_due_date
+# # ):
+# #     conn = mysql.connector.connect(
+# #         host="localhost",
+# #         user="root",
+# #         password="vinit1234",
+# #         database="haryana_electricity_bill"
+# #     )
+# #     cursor = conn.cursor()
+# #     cursor.execute('''INSERT INTO HVBN (
+# #         customer_name, dob, father_name, address, state_, post_office, 
+# #         pin_code, district, mobile_no, meter_no, account_no, old_due, 
+# #         old_reading_date, new_reading_date, total_days_reading, old_reading, 
+# #         new_reading, total_consumption, unit_rate, charges, total_amount, 
+# #         bill_due_date
+# #     ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, 
+# #     %s, %s, %s, %s, %s)''', (
+# #         customer_name, dob, father_name, address, state, post_office, pin_code, 
+# #         district, mobile_no, meter_no, account_no, old_due, old_reading_date, 
+# #         new_reading_date, total_days_reading, old_reading, new_reading, 
+# #         total_consumption, unit_rate, charges, total_amount, bill_due_date
+# #     ))
+# #     conn.commit()
+# #     conn.close()
+
+# # root = tk.Tk()
+# # root.title("Haryana Bijli Board")
+# # root.geometry("2000x850")
+
+# # # Add your corrected widgets here...
+
+# # create_database()
+# # create_table()
+
+# # root.mainloop()
+
+
+from tkinter import *
+from tkcalendar import DateEntry
+import tkinter as tk
+from tkinter import ttk
+import mysql.connector
+from tkinter import messagebox
+
+# Function to create the database
+def create_database():
+    conn = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="vinit1234"
+    )
+    cursor = conn.cursor()
+    cursor.execute("CREATE DATABASE IF NOT EXISTS haryana_electricity_bill")
+    conn.commit()
+    conn.close()
+
+# Function to create the table
+def create_table():
+    conn = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="vinit1234",
+        database="haryana_electricity_bill"
+    )
+    cursor = conn.cursor()
+    cursor.execute('''CREATE TABLE IF NOT EXISTS HVBN (
+                   id int auto_increment primary key,
+        customer_name VARCHAR(50),
+        dob DATE,
+        father_name VARCHAR(50),
+        address VARCHAR(50),
+        state_ VARCHAR(50),
+        post_office VARCHAR(50),
+        pin_code VARCHAR(50),
+        district VARCHAR(50),
+        mobile_no VARCHAR(50),
+        meter_no VARCHAR(50),
+        account_no VARCHAR(50),
+        old_due VARCHAR(50),
+        old_reading_date VARCHAR(50),
+        new_reading_date VARCHAR(50),
+        total_days_reading VARCHAR(50),
+        old_reading VARCHAR(50),
+        new_reading VARCHAR(50),
+        total_consumption VARCHAR(50),
+        unit_rate VARCHAR(50),
+        charges VARCHAR(50),
+        total_amount VARCHAR(50),
+        bill_due_date VARCHAR(50)
+    )''')
+    conn.commit()
+    conn.close()
+
+# Function to add data to the table
+def add_data(customer_name, dob, father_name, address, state, post_office, pin_code, district, mobile_no, meter_no, account_no, old_due, old_reading_date, new_reading_date, total_days_reading, old_reading, new_reading, total_consumption, unit_rate, charges, total_amount, bill_due_date):
+    conn = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="vinit1234",
+        database="haryana_electricity_bill"
+    )
+    cursor = conn.cursor()
+    cursor.execute('''INSERT INTO HVBN (customer_name, dob, father_name, address, state_, post_office, pin_code, district, mobile_no, meter_no, account_no, old_due, old_reading_date, new_reading_date, total_days_reading, old_reading, new_reading, total_consumption, unit_rate, charges, total_amount, bill_due_date) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)''', 
+    (customer_name, dob, father_name, address, state, post_office, pin_code, district, mobile_no, meter_no, account_no, old_due, old_reading_date, new_reading_date, total_days_reading, old_reading, new_reading, total_consumption, unit_rate, charges, total_amount, bill_due_date))
+
+    conn.commit()
+    conn.close()
+
+# Function to submit form data to the database
+def submit():
+    try:
+        customer_name = et_customer.get()
+        dob = et_dob.get_date().strftime("%Y-%m-%d")
+        father_name = et_father.get()
+        address = et_address.get()
+        state = state_.get()
+        post_office = et_post_office.get()
+        pin_code = et_pin_code.get()
+        district = dist1.get()
+        mobile_no = et_mobile_no.get()
+        meter_no = et_meter_no.get()
+        account_no = et_account_no.get()
+        old_due = et_old_due.get()
+        old_reading_date = et_old_reading_date.get()
+        new_reading_date = et_new_reading_date.get()
+        total_days_reading = et_total_days_reading.get()
+        old_reading = et_old_reading.get()
+        new_reading = et_new_reading.get()
+        total_consumption = et_total_consumption.get()
+        unit_rate = et_unit_rate.get()
+        charges = et_charges.get()
+        total_amount = et_total_amount.get()
+        bill_due_date = et_bill_due_date.get()
+
+        # Check if any field is empty
+        if not all([customer_name, dob, father_name, address, state, post_office, pin_code, district, mobile_no, meter_no, account_no, old_due, old_reading_date, new_reading_date, total_days_reading, old_reading, new_reading, total_consumption, unit_rate, charges, total_amount, bill_due_date]):
+            messagebox.showerror('Error', "All fields are mandatory")
+            return
+
+        # Insert data into the database
+        add_data(customer_name, dob, father_name, address, state, post_office, pin_code, district, mobile_no, meter_no, account_no, old_due, old_reading_date, new_reading_date, total_days_reading, old_reading, new_reading, total_consumption, unit_rate, charges, total_amount, bill_due_date)
+        
+        messagebox.showinfo('Success', "Data submitted successfully!")
+    except Exception as e:
+        messagebox.showerror('Error', str(e))
+
+root = tk.Tk()
+root.title("Haryana Bijli Board")
+root.geometry("2000x850")
+
+f = tk.LabelFrame(root, height=60, width=1000, font=("bold"), bg="#1E3D81").pack(fill=X)
+f1 = tk.Label(f, text="ELECTRICITY BILL", font=("arial 20 bold"), width=25, bg="#6CBCE0").place(x=550, y=12)
+
+f2 = tk.LabelFrame(root, width=80, height=700, bg="#006CB1").place(x=10, y=70)
+text="ELECTRICITY BILL"
+for i, char in enumerate(text):
+    label=Label(f2,text=char,bg="#006CB1",fg="white",font=("helvetica", 18))
+    label.place(x=40, y=170 + i*30)
+
+f3 = tk.LabelFrame(root, width=80, height=700, bg="#006CB1").place(x=1445, y=70)
+for i, char in enumerate(text):
+    label=Label(f3,text=char,bg="#006CB1",fg="white",font=("helvetica", 18))
+    label.place(x=1475, y=170 + i*30)
+f4 = tk.LabelFrame(root, height=250, width=1335, bg="#6CBCE0").place(x=100, y=72)
+
+e = tk.Label(f4, text="Customer Detail", bg="#6CBCE0", font=("bold")).place(x=111, y=76)
+e1 = tk.Label(f4, text="Customer name", font=("arial 11 bold"), bg="#6CBCE0").place(x=222, y=140)
+et_customer = tk.Entry(f4)
+et_customer.place(x=355, y=145)
+
+e2 = tk.Label(f4, text="D.O.B", bg="#6CBCE0", font=("arial 11 bold")).place(x=680, y=140)
+et_dob = DateEntry(f4, width=17)
+et_dob.place(x=750, y=142)
+
+e3 = tk.Label(f4, text="Father name", bg="#6CBCE0", font=("arial 11 bold")).place(x=1080, y=140)
+et_father = tk.Entry(f4)
+et_father.place(x=1200, y=144)
+
+e4 = tk.Label(f4, text="Address", bg="#6CBCE0", font=("arial 11 bold")).place(x=222, y=200)
+et_address = tk.Entry(f4)
+et_address.place(x=355, y=205)
+
+e5 = tk.Label(f4, text="State", bg="#6CBCE0", font=("arial 11 bold")).place(x=680, y=200)
+state = StringVar()
+state_ = ttk.Combobox(f4, width=17, height=5, textvariable=state)
+state_["state"] = "readonly"
+state_["values"] = ("Haryana",)
+state_.place(x=750, y=202)
+state_.current(0)
+
+e6 = tk.Label(f4, text="Post office", bg="#6CBCE0", font=("arial 11 bold")).place(x=1080, y=200)
+et_post_office = tk.Entry(f4)
+et_post_office.place(x=1200, y=204)
+
+e7 = tk.Label(f4, text="Pin code", bg="#6CBCE0", font=("arial 11 bold")).place(x=222, y=260)
+et_pin_code = tk.Entry(f4)
+et_pin_code.place(x=355, y=260)
+
+e8 = tk.Label(f4, text="District", bg="#6CBCE0", font=("arial 11 bold")).place(x=680, y=260)
+et_distt = StringVar()
+dist1 = ttk.Combobox(f4, width=17, textvariable=et_distt)
+dist1["state"] = "readonly"
+dist1["values"] = ("Yamunanagar", "Ambala", "Gurugram", "Hisar", "Jind")
+dist1.place(x=750, y=260)
+dist1.current(0)
+
+e = tk.Label(f4, text="Mobile No", bg="#6CBCE0", font=("arial 11 bold")).place(x=1080, y=260)
+et_mobile_no = tk.Entry(f4)
+et_mobile_no.place(x=1200, y=260)
+
+f5 = tk.LabelFrame(root, height=250, width=1335, bg="#6CBCE0").place(x=100, y=333)
+
+e9 = tk.Label(f5, text="Bill detail", bg="#6CBCE0", font=("bold")).place(x=111, y=345)
+e10 = tk.Label(f5, text="Meter No", bg="#6CBCE0", font=("arial 11 bold")).place(x=200, y=400)
+et_meter_no = tk.Entry(f5)
+et_meter_no.place(x=355, y=400)
+
+e11 = tk.Label(f5, text="Account No", bg="#6CBCE0", font=("arial 11 bold")).place(x=590, y=400)
+et_account_no = tk.Entry(f5)
+et_account_no.place(x=744, y=400)
+
+e12 = tk.Label(f5, text="Old Due", bg="#6CBCE0", font=("arial 11 bold")).place(x=1040, y=400)
+et_old_due = tk.Entry(f5)
+et_old_due.place(x=1200, y=400)
+
+e13 = tk.Label(f5, text="Old Reading Date", bg="#6CBCE0", font=("arial 11 bold")).place(x=200, y=460)
+et_old_reading_date = tk.Entry(f5)
+et_old_reading_date.place(x=355, y=460)
+
+e14 = tk.Label(f5, text="New Reading Date", bg="#6CBCE0", font=("arial 11 bold")).place(x=590, y=460)
+et_new_reading_date = tk.Entry(f5)
+et_new_reading_date.place(x=744, y=460)
+
+e15 = tk.Label(f5, text="Total Days Reading", bg="#6CBCE0", font=("arial 11 bold")).place(x=1040, y=460)
+et_total_days_reading = tk.Entry(f5)
+et_total_days_reading.place(x=1200, y=460)
+
+e16 = tk.Label(f5, text="Old Reading ", bg="#6CBCE0", font=("arial 11 bold")).place(x=200, y=520)
+et_old_reading = tk.Entry(f5)
+et_old_reading.place(x=355, y=520)
+
+e17 = tk.Label(f5, text="New Reading", bg="#6CBCE0", font=("arial 11 bold")).place(x=590, y=520)
+et_new_reading = tk.Entry(f5)
+et_new_reading.place(x=744, y=520)
+
+e18 = tk.Label(f5, text="Total Consumption", bg="#6CBCE0", font=("arial 11 bold")).place(x=1040, y=520)
+et_total_consumption = tk.Entry(f5)
+et_total_consumption.place(x=1200, y=520)
+
+f6 = tk.LabelFrame(root, height=100, width=1335, bg="#6CBCE0").place(x=100, y=594)
+f7 = tk.Label(f6, text="Amount", bg="#6CBCE0", font=("bold")).place(x=111, y=606)
+A = tk.Label(f6, text="Unit Rate", bg="#6CBCE0", font=("arial 11 bold")).place(x=230, y=645)
+et_unit_rate = tk.Entry(f6)
+et_unit_rate.place(x=355, y=645)
+
+A1 = tk.Label(f6, text="Charges", bg="#6CBCE0", font=("arial 11 bold")).place(x=625, y=645)
+et_charges = tk.Entry(f6)
+et_charges.place(x=744, y=645)
+
+A2 = tk.Label(f6, text="Total Amount", bg="#6CBCE0", font=("arial 11 bold")).place(x=1070, y=645)
+et_total_amount = tk.Entry(f6)
+et_total_amount.place(x=1200, y=645)
+
+f8 = tk.LabelFrame(root, width=450, height=55, font=("arial 11 bold"), bg="#006CB1").place(x=984, y=705)
+var = tk.Label(f8, text="Bill due date", bg="#006CB1", font=("arial 12 ")).place(x=1068, y=720)
+et_bill_due_date = tk.Entry(f8)
+et_bill_due_date.place(x=1198, y=723)
+
+var3 = tk.Button(root, text="Submit", bg="#6CBCE0", font=("arial 13 bold"), command=submit).place(x=730, y=730)
+
+f9 = tk.LabelFrame(root, width=450, height=55, font=("arial 11 bold"), bg="#006CB1").place(x=100, y=705)
+var4 = tk.Label(f9, text="HARYANA BIJLI VITRAN NIGAM", bg="#006CB1", font=("bold")).place(x=175, y=717)
+
+create_database()
+create_table()
+
+root.mainloop()
